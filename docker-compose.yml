@@ -1,0 +1,26 @@
+services:
+  postgres:
+    image: postgres:16-alpine
+    environment: { POSTGRES_USER: pensee, POSTGRES_PASSWORD: pensee, POSTGRES_DB: pensee }
+    ports: ["5434:5432"]
+    volumes: [pgdata:/var/lib/postgresql/data]
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U pensee"]
+      interval: 3s
+      retries: 10
+  api:
+    build: ./server
+    environment:
+      PORT: 4004
+      DATABASE_URL: postgres://pensee:pensee@postgres:5432/pensee
+      CORS_ORIGIN: http://localhost:5174
+    ports: ["4004:4004"]
+    depends_on:
+      postgres: { condition: service_healthy }
+  client:
+    build:
+      context: ./client
+      args: { VITE_API_URL: "http://localhost:4004" }
+    ports: ["5174:80"]
+volumes:
+  pgdata:

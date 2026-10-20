@@ -1,0 +1,33 @@
+# Dépendances
+
+node_modules/
+
+# Fichiers générés
+
+dist/
+build/
+
+# Variables d'environnement et secrets
+
+.env
+.env.*
+!.env.example
+
+# Journaux
+
+*.log
+npm-debug.log*
+yarn-debug.log*
+pnpm-debug.log*
+
+# Système et éditeur
+
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/
+
+# Fichiers temporaires
+
+*.tmp
+*.swp
