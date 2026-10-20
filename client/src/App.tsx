@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 
-const API = import.meta.env.VITE_API_URL ?? "http://localhost:4004";
+const API = import.meta.env.VITE_API_URL ?? "";
 
 type RoutineId = "see-think-wonder" | "used-to-think";
 type Step = { key: string; title: string; prompt: string; starter: string };
